@@ -1,18 +1,27 @@
 package view;
 
 import javax.imageio.ImageIO;
-
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JRadioButtonMenuItem;
 
+import controller.ControladorTabuleiro;
 import model.Pecas;
 import model.Posicoes;
 import model.Tabuleiro;
+import model.TipoPeca;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -23,7 +32,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class TabuleiroPainel extends JPanel implements ObservaSujeito{
+public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionListener{
 
 	/**
 	 * 
@@ -38,6 +47,7 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito{
 	private int lin = 8;
 	private int col = 8 ;
 	private Vector<Posicoes> posicoesPossiveis ;
+	private  Object[] pecas = { "Bispo","Rainha", "Cavalo","Torre" };
 	
 	
 	public TabuleiroPainel(Tabuleiro NovoTabuleiro) {
@@ -136,9 +146,77 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito{
 	 }
 
 	
-	 public void update(){
-		 repaint();
+	 public void update(int i){
+		 if (i == 1) {
+			 repaint();
+		}
+		 else {
+			 popUpPromocao();
+		 }
+		 
+		
 	}
+	 
+	public void popUpPromocao(){
+		
+		JPopupMenu popUp = new JPopupMenu("Promoção do Peão");
+		double largura = this.getWidth()/(1.6);
+		double altura = this.getHeight()/(11.7);
+		
+		
+		JMenuItem label = new JMenuItem("Selecione uma peça:");
+		label.setFont(new java.awt.Font("Dialog", Font.BOLD, 11));
+		popUp.add(label);
+		
+		JRadioButtonMenuItem torre = new JRadioButtonMenuItem("Torre");
+		torre.setPreferredSize(new Dimension((int)largura,(int)altura));
+		torre.addActionListener(this);
+		popUp.add(torre);
+		
+		JRadioButtonMenuItem cavalo = new JRadioButtonMenuItem("Cavalo");
+		cavalo.setPreferredSize(new Dimension((int)largura,(int)altura));
+		cavalo.addActionListener(this);
+		popUp.add(cavalo);
+		
+		JRadioButtonMenuItem bispo = new JRadioButtonMenuItem("Bispo");
+		bispo.setPreferredSize(new Dimension((int)largura,(int)altura));
+		bispo.addActionListener(this);
+		popUp.add(bispo);
+		
+		JRadioButtonMenuItem rainha = new JRadioButtonMenuItem("Rainha");
+		rainha.setPreferredSize(new Dimension((int)largura,(int)altura));
+		rainha.addActionListener(this);
+		popUp.add(rainha);
+		
+		popUp.show(this,(int)(this.getWidth()-largura)/2, (int)(this.getHeight()-5*altura)/2);
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+	ControladorTabuleiro controlador = ControladorTabuleiro.getControladorTabuleiro();
+	if (e.getActionCommand() != null) {
+		switch (e.getActionCommand()) {
+        case "Torre":
+        	System.out.println( " TORRE" );
+        	 controlador.PromocaoPeao(TipoPeca.Torre);
+            break;
+        case "Cavalo":
+        	System.out.println( " CAVALO" );
+        	controlador.PromocaoPeao(TipoPeca.Cavalo);
+            break;
+        case "Bispo":
+        	System.out.println( " BISPO" );
+        	controlador.PromocaoPeao(TipoPeca.Bispo);
+            break;
+        case "Rainha":
+        	System.out.println( " RAINHA" );
+        	controlador.PromocaoPeao(TipoPeca.Rainha);
+            break;
+		}
+	}
+		
+		
+	}
+	
 
 	
 		

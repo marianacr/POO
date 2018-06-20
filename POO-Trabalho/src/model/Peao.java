@@ -33,7 +33,7 @@ public class Peao extends Pecas{
 	}
 	public boolean MovimentosPermitidos(int PecaLin, int PecaCol, Tabuleiro tabuleiro) {
 		 		// verifica se esta no primeiro movimento ou nao;
-		 		QtdMovimento();
+		 		QtdMovimento(tabuleiro);
 		
 			 	if (this.cor == branco){
 			 		
@@ -99,18 +99,18 @@ public class Peao extends Pecas{
 		 
 		return TipoPeca.Peao;
 	 }
-	private void QtdMovimento() {
+	private void QtdMovimento(Tabuleiro tabuleiro) {
 		 
 		 if(this.cor == preto)
 	        {
-	            if(this.col == 6)
+	            if(this.col == 6 && !tabuleiro.posicaoOcupada(this.lin,5))
 	            	PrimeiroMovimento = true;
 	            else
 	            	PrimeiroMovimento = false;
 	        }
 	        else
 	        {
-	            if(this.col == 1)
+	            if(this.col == 1 && !tabuleiro.posicaoOcupada(this.lin,2))
 	            	PrimeiroMovimento = true;
 	            else
 	            	PrimeiroMovimento = false;
