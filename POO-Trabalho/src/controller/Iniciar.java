@@ -7,7 +7,6 @@ public class Iniciar {
 	
 		
 	   ControladorTabuleiro controlador = ControladorTabuleiro.getControladorTabuleiro();	
-	//   controlador.frame.painelTabuleiro.popUpPromocao();
 	   controlador.addObserver(controlador.frame.painelTabuleiro);
 		// se a partidar terminar, salva e coloca ControladorTabuleiro.getControladorTabuleiro().encerraControladorTabuleiro()
 	}

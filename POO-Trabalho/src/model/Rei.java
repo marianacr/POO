@@ -39,8 +39,8 @@ public class Rei extends Pecas {
 		 		adversario = preto;
 		 	}
 
-	        if(this.lin-1 ==PecaLin && this.col == PecaCol && (!tabuleiro.posicaoOcupada(PecaLin, PecaCol) || (tabuleiro.LocalizaPeca(PecaLin, PecaCol).getColor() == adversario)) )
-	            return true;
+	        if(this.lin-1 ==PecaLin && this.col == PecaCol &&  (!tabuleiro.posicaoOcupada(PecaLin, PecaCol) || (tabuleiro.LocalizaPeca(PecaLin, PecaCol).getColor() == adversario)) )
+	        	return true;
 	        else if(this.lin+1 ==PecaLin && this.col == PecaCol && (!tabuleiro.posicaoOcupada(PecaLin, PecaCol) || (tabuleiro.LocalizaPeca(PecaLin, PecaCol).getColor() == adversario)) )
 	            return true;
 	        else if(this.lin ==PecaLin && this.col+1 == PecaCol && (!tabuleiro.posicaoOcupada(PecaLin, PecaCol) || (tabuleiro.LocalizaPeca(PecaLin, PecaCol).getColor() == adversario)) )
@@ -61,6 +61,7 @@ public class Rei extends Pecas {
 	        	return true;
 	        else
 	            return false;
+			
 	 }
 	 
 	 public TipoPeca getTipo(){
@@ -158,16 +159,29 @@ public class Rei extends Pecas {
 		 }
 	 }
 	 
-	 public Vector<Posicoes> VetorMovimentos(Tabuleiro tabuleiro) {
+	 public Vector<Posicoes> VetorMovimentos(Tabuleiro tabuleiro, boolean Xeque){
 		 Vector<Posicoes> pos = new Vector<Posicoes>();
 
+		 if (!Xeque) {
 	        for(int i = 0; i < 8;i++ ){
 	            for(int j = 0; j < 8;j++){
-	                if( MovimentosPermitidos(i, j,tabuleiro))
-	                    pos.add(new Posicoes(i, j));
+	            	 if( MovimentosPermitidos(i, j,tabuleiro))
+		                    pos.add(new Posicoes(i, j));
 	            }
 	        }
+	      }
+		 else {
+			 for(int i = 0; i < 8;i++ ){
+		            for(int j = 0; j < 8;j++){
+		            	 if( MovimentosPermitidos(i, j,tabuleiro) && !tabuleiro.VerificaJogadaXeque(this, i, j, tabuleiro))
+		                     pos.add(new Posicoes(i, j));
+		            	
+		            }
+		        }
+			 
+		 }
 	        return pos;
 	}
-
+	 
+	
 }

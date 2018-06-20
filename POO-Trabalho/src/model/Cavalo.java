@@ -93,15 +93,29 @@ public class Cavalo extends Pecas{
             return false;
 	 }
 	 
-	 public Vector<Posicoes> VetorMovimentos(Tabuleiro tabuleiro) {
+	 public Vector<Posicoes> VetorMovimentos(Tabuleiro tabuleiro, boolean Xeque){
 		 Vector<Posicoes> pos = new Vector<Posicoes>();
 
+		 if (!Xeque) {
 	        for(int i = 0; i < 8;i++ ){
 	            for(int j = 0; j < 8;j++){
-	                if( MovimentosPermitidos(i, j,tabuleiro))
-	                    pos.add(new Posicoes(i, j));
+	            	 if( MovimentosPermitidos(i, j,tabuleiro))
+		                    pos.add(new Posicoes(i, j));
 	            }
 	        }
+	      }
+		 else {
+			 for(int i = 0; i < 8;i++ ){
+		            for(int j = 0; j < 8;j++){
+		            	
+		            	 if( MovimentosPermitidos(i, j,tabuleiro) && !tabuleiro.VerificaJogadaXeque(this, i, j, tabuleiro))
+		                     pos.add(new Posicoes(i, j));
+		            	
+		            }
+		        }
+			 
+		 }
 	        return pos;
 	}
+
 }

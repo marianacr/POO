@@ -14,7 +14,8 @@ public abstract class Pecas {
 	  
 	public abstract boolean MovimentosPermitidos(int PecaLin, int PecaCol, Tabuleiro tabuleiro);
 	
-	public abstract Vector<Posicoes> VetorMovimentos(Tabuleiro tabuleiro);
+	public abstract Vector<Posicoes> VetorMovimentos(Tabuleiro tabuleiro, boolean Xeque);
+	
 	
 	public int getLin() {
 		return this.lin;
