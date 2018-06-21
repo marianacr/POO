@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.UIManager;
 
 import controller.ControladorTabuleiro;
 import model.Pecas;
@@ -137,31 +138,66 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 		
 	}
 	 
-	 void unselectSquare(int row, int col) {
-		 
-	 }
-	 
-	 void unselectAll() {
-		 
-	 }
-
-	
+		
 	 public void update(int i){
 		 if (i == 1) {
 			 repaint();
 		}
-		 else {
+		 else if( i == 2) {
 			 popUpPromocao();
 		 }
+		 else if (i == 3) {
+			 popUpXequeMate(i);
+		 }
+		 else if (i == 4) {
+			 popUpXequeMate(i);
+		 }
+		 else
+			 popUpCongelamento();
 		 
+		
+	}
+	 
+	private void  popUpCongelamento() {
+		
+		int entrada;
+		Object[] opcoes = { "OK" };
+		UIManager.put("OptionPane.minimumSize",new Dimension(400,200)); 
+	
+			entrada = JOptionPane.showOptionDialog(null, "Congelamento : Foi empate !", "Xadrez", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes,  opcoes[0]);
+				
+			if(entrada == JOptionPane.OK_OPTION)
+			{
+				System.out.println("CONGELAMENTO REINICIA JOGO");
+			}
+		
+	}
+		
+	
+	 
+	private void popUpXequeMate(int i) {
+		int entrada;
+		Object[] opcoes = { "OK" };
+		UIManager.put("OptionPane.minimumSize",new Dimension(400,200)); 
+		if (i == 3) {
+			entrada = JOptionPane.showOptionDialog(null, "XEQUE MATE : Time Branco Venceu", "Xadrez", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes,  opcoes[0]);
+		}
+		else {
+			entrada = JOptionPane.showOptionDialog(null, "XEQUE MATE : Time Preto Venceu", "Xadrez", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes,  opcoes[0]);
+		}
+		
+			if(entrada == JOptionPane.OK_OPTION)
+			{
+				System.out.println("REINICIA JOGO");
+			}
 		
 	}
 	 
 	public void popUpPromocao(){
 		
 		JPopupMenu popUp = new JPopupMenu("Promoção do Peão");
-		double largura = this.getWidth()/(1.6);
-		double altura = this.getHeight()/(11.7);
+		double largura = this.getWidth()/2;
+		double altura = this.getHeight()/10;
 		
 		
 		JMenuItem label = new JMenuItem("Selecione uma peça:");

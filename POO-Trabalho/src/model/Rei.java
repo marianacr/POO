@@ -55,9 +55,9 @@ public class Rei extends Pecas {
 	            return true;
 	        else if(this.lin-1 ==PecaLin && this.col-1 == PecaCol && (!tabuleiro.posicaoOcupada(PecaLin, PecaCol) || (tabuleiro.LocalizaPeca(PecaLin, PecaCol).getColor() == adversario)) )
 	            return true;
-	        else if (VerificaRoqueDir(PecaLin,PecaCol,tabuleiro))
+	        else if (VerificaRoqueDir(PecaLin,PecaCol,tabuleiro) && !tabuleiro.XequeRei(this.cor))
 	        	return true;
-	        else if (VerificaRoqueEsq(PecaLin,PecaCol,tabuleiro))
+	        else if (VerificaRoqueEsq(PecaLin,PecaCol,tabuleiro) && !tabuleiro.XequeRei(this.cor))
 	        	return true;
 	        else
 	            return false;
@@ -110,7 +110,7 @@ public class Rei extends Pecas {
 	 private boolean VerificaTorreDireita(Tabuleiro tabuleiro) {
 		 
 		 if( this.cor == branco) {
-			 if( tabuleiro.LocalizaPeca(7,0).getTipo() == TipoPeca.Torre) {
+			 if( tabuleiro.LocalizaPeca(7,0) != null && tabuleiro.LocalizaPeca(7,0).getTipo() == TipoPeca.Torre) {
 				 
 				 if(!tabuleiro.posicaoOcupada(5, 0) && !tabuleiro.posicaoOcupada(6, 0))
 					 return true;
@@ -121,7 +121,7 @@ public class Rei extends Pecas {
 		 }
 		 else {
 			 
-			 if( tabuleiro.LocalizaPeca(7,7).getTipo() == TipoPeca.Torre) {
+			 if( tabuleiro.LocalizaPeca(7,7) != null && tabuleiro.LocalizaPeca(7,7).getTipo() == TipoPeca.Torre) {
 				 
 				 if(!tabuleiro.posicaoOcupada(5, 7) && !tabuleiro.posicaoOcupada(6, 7))
 					 return true;
@@ -136,7 +136,7 @@ public class Rei extends Pecas {
 	 private boolean VerificaTorreEsquerda(Tabuleiro tabuleiro) {
 		 
 		 if(this.cor == branco) {
-			 if( tabuleiro.LocalizaPeca(0,0).getTipo() == TipoPeca.Torre) {
+			 if( tabuleiro.LocalizaPeca(0,0) != null && tabuleiro.LocalizaPeca(0,0).getTipo() == TipoPeca.Torre) {
 				 
 				 if(!tabuleiro.posicaoOcupada(1, 0) && !tabuleiro.posicaoOcupada(2, 0) && !tabuleiro.posicaoOcupada(3, 0))
 					 return true;
@@ -147,7 +147,7 @@ public class Rei extends Pecas {
 		 }
 		 else {
 			 
-			 if( tabuleiro.LocalizaPeca(0,7).getTipo() == TipoPeca.Torre) {
+			 if( tabuleiro.LocalizaPeca(0,7) != null && tabuleiro.LocalizaPeca(0,7).getTipo() == TipoPeca.Torre) {
 				 
 				 if(!tabuleiro.posicaoOcupada(1, 7) && !tabuleiro.posicaoOcupada(2, 7) && !tabuleiro.posicaoOcupada(3, 7) )
 					 return true;
