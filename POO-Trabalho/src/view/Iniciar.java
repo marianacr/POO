@@ -25,7 +25,7 @@ public class Iniciar{
 	
 
 	public static void Iniciar() {
-		controlador = ControladorTabuleiro.getControladorTabuleiro();	
+		controlador = ControladorTabuleiro.getControladorTabuleiro(null);	
 	 	controlador.addObserver(controlador.frame.painelTabuleiro);
 		
 	}
@@ -33,16 +33,16 @@ public class Iniciar{
 	public static void ReIniciar() {
 		
 		controlador.EncerraControladorTabuleiro();
-		controlador = controlador.getControladorTabuleiro();	
+		controlador = controlador.getControladorTabuleiro(null);	
 		controlador.addObserver(controlador.frame.painelTabuleiro);
 		
 	}
 
 
 	public static void Carregar(Tabuleiro boardLoaded) {
-		controlador = controlador.getControladorTabuleiro();
+		controlador = controlador.getControladorTabuleiro(boardLoaded);
 		controlador.addObserver(controlador.frame.painelTabuleiro);
-		controlador.setTabuleiro(boardLoaded);
+		
 		
 		
 	}

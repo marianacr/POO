@@ -266,7 +266,7 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-	ControladorTabuleiro controlador = ControladorTabuleiro.getControladorTabuleiro();
+	ControladorTabuleiro controlador = ControladorTabuleiro.getControladorTabuleiro(null);
 	if (e.getActionCommand() != null) {
 		switch (e.getActionCommand()) {
         case "Torre":

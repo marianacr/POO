@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 
-public abstract class Pecas implements Serializable {
+public abstract class Pecas {
 	public static final int preto = 0;
 	public static final int branco = 1;
 	protected int lin, col;

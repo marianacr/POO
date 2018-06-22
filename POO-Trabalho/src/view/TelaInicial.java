@@ -10,6 +10,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 public class TelaInicial extends JFrame implements ActionListener {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame telaHome = new JFrame("Xadrex");
     public final int LARG_DEFAULT=800;
     public final int ALT_DEFAULT=800;
@@ -17,15 +21,8 @@ public class TelaInicial extends JFrame implements ActionListener {
 	 public TelaInicial(){		
 	    	
 		 
-		 	Toolkit tela = Toolkit.getDefaultToolkit();
-	    	Dimension screenSize = tela.getScreenSize();
-	    	
-	    	int sl=screenSize.width;
-			int sa=screenSize.height;
-			int largura=sl/2-LARG_DEFAULT/2 ;
-			int altura=sa/2-ALT_DEFAULT/2 ;
-			
-		
+		    	
+	   	
 			Dimension tamTela = new Dimension(LARG_DEFAULT, ALT_DEFAULT);
 	    	JButton b1 = new JButton("Novo Jogo");
 			JButton b2 = new JButton("Carregar Jogo");

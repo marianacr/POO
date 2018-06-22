@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import view.ObservaSujeito;
 
-public class Tabuleiro implements Serializable {
+public class Tabuleiro  {
 	
 	public static final int Tam_Tabuleiro = 8;
 	public Pecas[][] tabuleiro = new Pecas[Tam_Tabuleiro][Tam_Tabuleiro];
