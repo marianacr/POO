@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Vector;
 
 import view.ObservaSujeito;
 
-public class Tabuleiro {
+public class Tabuleiro implements Serializable {
 	
 	public static final int Tam_Tabuleiro = 8;
 	public Pecas[][] tabuleiro = new Pecas[Tam_Tabuleiro][Tam_Tabuleiro];
@@ -28,6 +29,20 @@ public class Tabuleiro {
 			
 			InicializaPecas();
 	}
+	public void TabuleiroCarregar(Tabuleiro tabuleiroAux) {
+		Pecas p0,p1;
+		for(int i = 0; i< 8 ; i++) {
+			for(int j = 0; j < 8; j ++) {
+					p0 = tabuleiroAux.LocalizaPeca(i,j);
+				
+					if (p0 != null) {
+							p1 = CriaPeca(p0.getLin(), p0.getCol(),p0.getTipo(), p0.getColor());
+						    addPeca(p1);
+					}
+				}
+			}
+	}
+
 	
 	
 	 private void InicializaPecas() {
@@ -301,19 +316,11 @@ public class Tabuleiro {
 	
 	private Tabuleiro ReconstroiTabuleiro(Tabuleiro tabuleiro) {
 		
-		Pecas p0,p1;
+		
 		
 		Tabuleiro tabuleiroAux = new Tabuleiro();
-		for(int i = 0; i< 8 ; i++) {
-			for(int j = 0; j < 8; j ++) {
-					p0 = tabuleiro.LocalizaPeca(i,j);
-				
-					if (p0 != null) {
-							p1 = CriaPeca(p0.getLin(), p0.getCol(),p0.getTipo(), p0.getColor());
-						tabuleiroAux.addPeca(p1);
-					}
-				}
-			}
+		tabuleiroAux.TabuleiroCarregar(tabuleiro);
+		
 		return tabuleiroAux;
 		
 	}

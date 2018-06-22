@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Peao extends Pecas{
 	
@@ -22,7 +23,7 @@ public class Peao extends Pecas{
 				img = ImageIO.read(new File("Imagens/CyanP.png"));
 			}
 			else {
-				img = ImageIO.read(new File("Imagens/PurpleP.png"));
+				img =ImageIO.read(new File("Imagens/PurpleP.png"));
 			}
 			
 		}

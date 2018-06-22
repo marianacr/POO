@@ -32,20 +32,24 @@ public class TabuleiroFrame extends JFrame {
 			int x1=sl/2- LARG_DEFAULT/2 ;
 			int y1=sa/2- ALT_DEFAULT/2 ;
 			
+			
+			
 			Dimension tamTabuleiro = new Dimension(LARG_DEFAULT, ALT_DEFAULT);
 	    	painelTabuleiro = new TabuleiroPainel(NovoTabuleiro);
 	    	painelTabuleiro.setPreferredSize( tamTabuleiro );
 			
-		//	painelTabuleiro.setBounds(x1,y1,LARG_DEFAULT,ALT_DEFAULT);
 			setDefaultCloseOperation(EXIT_ON_CLOSE);
 			
 	    	setTitle("Xadrez");	
 			getContentPane().add(painelTabuleiro);
 			
 			
+			
+			
 		
 		}
-	
+	    
+	   
 }
 		
 		

@@ -29,15 +29,16 @@ import java.util.Observer;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 
 public class ControladorTabuleiro implements MouseListener, Sujeito {
 	
-	TabuleiroFrame frame;
-	private Tabuleiro tabuleiro;
+	public static TabuleiroFrame frame;
+	public static Tabuleiro tabuleiro;
 	private int repintar = 1;
 	private int promocaoPeao = 2;
-	private int XequeMateBranco = 3, XequeMatePreto = 4, congelamento = 5;
+	private int XequeMateBranco = 3, XequeMatePreto = 4, congelamento = 5, salvar = 6;
 	private int alturaFrame, alturaQuadrado,larguraFrame,larguraQuadrado;
 	private int posX, posY, velhoX, velhoY;
 	private int numClick = 0;
@@ -73,14 +74,32 @@ public class ControladorTabuleiro implements MouseListener, Sujeito {
 	public static void EncerraControladorTabuleiro() {
 		controlador = null;
 	}
+	
+	 public static void fecharFrame() {
+	    	frame.dispose();
+	    }
+	
+	
+	public static void setTabuleiro(Tabuleiro loadTabuleiro) {
+		
+	      tabuleiro.TabuleiroCarregar(loadTabuleiro);
+	      
+		
+		
+	}
 
 	
 	public void mouseClicked(MouseEvent e) {
-		
+		notificaObservers(repintar);
+		// verifica se foi com o botao direito
+		if(SwingUtilities.isRightMouseButton(e)) {
+			//gera popUp e tabuleiro deve ser salvo
+			notificaObservers(salvar);
+		}
 		//transformar a frame nos quadrados
 		localizaQuadrado(e.getX(),e.getY());
 		
-		
+	
 		// primeiro click so é validado quando clica numa casa não vazia
 		
 		if ( numClick == 0 && tabuleiro.LocalizaPeca(posX, posY)!= null) {
@@ -259,8 +278,9 @@ public class ControladorTabuleiro implements MouseListener, Sujeito {
 							if(pecaSegundoClick.getTipo() == TipoPeca.Rei && pecaPrimeiroClick.getColor() != pecaSegundoClick.getColor()) {
 								if (pecaPrimeiroClick.getColor() == 1)
 									notificaObservers(XequeMateBranco);
-								else
+								else {
 									notificaObservers(XequeMatePreto);
+								}
 							}
 							// retiro a peca que foi comida		
 							tabuleiro.removePeca(posX, posY);

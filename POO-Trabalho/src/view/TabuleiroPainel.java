@@ -23,6 +23,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -49,6 +50,7 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 	private int col = 8 ;
 	private Vector<Posicoes> posicoesPossiveis ;
 	private  Object[] pecas = { "Bispo","Rainha", "Cavalo","Torre" };
+	
 	
 	
 	public TabuleiroPainel(Tabuleiro NovoTabuleiro) {
@@ -140,23 +142,58 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 	 
 		
 	 public void update(int i){
-		 if (i == 1) {
+		 if (i == 1) 
 			 repaint();
-		}
-		 else if( i == 2) {
+		else if(i == 2) 
 			 popUpPromocao();
-		 }
-		 else if (i == 3) {
+		 else if (i == 3) 
 			 popUpXequeMate(i);
-		 }
-		 else if (i == 4) {
+		 else if (i == 4) 
 			 popUpXequeMate(i);
-		 }
-		 else
+		 else if (i == 5)
 			 popUpCongelamento();
+		 else
+			 popUpSalvar();
 		 
 		
 	}
+	 
+	 public void popUpSalvar() {
+		 System.out.println( " salvar" );
+		 if(SalvarCarregar.Salvar()) {
+			 
+			 	int entrada;
+				Object[] opcoes = { "OK" };
+				UIManager.put("OptionPane.minimumSize",new Dimension(400,200)); 
+			
+					entrada = JOptionPane.showOptionDialog(null, "JOGO SALVO", "Xadrez", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes,  opcoes[0]);
+						
+					if(entrada == JOptionPane.OK_OPTION)
+					{
+						System.out.println("REINICIA JOGO");
+						ControladorTabuleiro.fecharFrame();
+						Iniciar.Salvar();
+					}
+			 
+			 
+		 }
+		 else {
+			 int entrada;
+				Object[] opcoes = { "OK" };
+				UIManager.put("OptionPane.minimumSize",new Dimension(400,200)); 
+			
+					entrada = JOptionPane.showOptionDialog(null, "ERRO AO SALVAR", "Xadrez", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes,  opcoes[0]);
+						
+					if(entrada == JOptionPane.OK_OPTION)
+					{
+						System.out.println("REINICIA JOGO");
+						ControladorTabuleiro.fecharFrame();
+						Iniciar.Salvar();
+					}
+		 }
+		 
+		 
+	 }
 	 
 	private void  popUpCongelamento() {
 		
@@ -169,6 +206,7 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 			if(entrada == JOptionPane.OK_OPTION)
 			{
 				System.out.println("CONGELAMENTO REINICIA JOGO");
+				Iniciar.ReIniciar();
 			}
 		
 	}
@@ -189,6 +227,7 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 			if(entrada == JOptionPane.OK_OPTION)
 			{
 				System.out.println("REINICIA JOGO");
+				Iniciar.ReIniciar();
 			}
 		
 	}
@@ -201,7 +240,6 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 		
 		
 		JMenuItem label = new JMenuItem("Selecione uma peça:");
-		label.setFont(new java.awt.Font("Dialog", Font.BOLD, 11));
 		popUp.add(label);
 		
 		JRadioButtonMenuItem torre = new JRadioButtonMenuItem("Torre");
@@ -249,9 +287,12 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
             break;
 		}
 	}
+	
+	
 		
 		
-	}
+}
+	
 	
 
 	

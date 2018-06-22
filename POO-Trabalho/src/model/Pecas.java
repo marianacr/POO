@@ -1,9 +1,12 @@
 package model;
 
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.Vector;
 
-public abstract class Pecas {
+import javax.swing.ImageIcon;
+
+public abstract class Pecas implements Serializable {
 	public static final int preto = 0;
 	public static final int branco = 1;
 	protected int lin, col;
