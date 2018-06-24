@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+
 
 public class Peao extends Pecas{
 	

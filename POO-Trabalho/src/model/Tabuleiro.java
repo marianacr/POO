@@ -1,10 +1,6 @@
 package model;
 
-import java.io.Serializable;
-import java.util.Iterator;
 import java.util.Vector;
-
-import view.ObservaSujeito;
 
 public class Tabuleiro  {
 	

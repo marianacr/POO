@@ -2,40 +2,31 @@ package view;
 
 
 
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.io.PrintStream;
 import java.util.Objects;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
+
+
 
 
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.sun.xml.internal.ws.util.ReadAllStream;
 
 import controller.ControladorTabuleiro;
-import model.Bispo;
-import model.Cavalo;
-import model.Peao;
 import model.Pecas;
-import model.Rainha;
-import model.Rei;
 import model.Tabuleiro;
 import model.TipoPeca;
-import model.Torre;
+
 public class SalvarCarregar {
 	
 private static int cor;
@@ -202,7 +193,7 @@ public static boolean Salvar(){
     }
     
     private static TipoPeca VerificaPeca ( String s) {
-    	System.out.println("VERIFICA S   " + s );
+    
     	if( Objects.equals(s,"TorreBranca") ){
     		cor = 1;
     		return TipoPeca.Torre;

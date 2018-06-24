@@ -2,9 +2,10 @@ package view;
 
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
+
 import javax.swing.*;
 
+import java.awt.Toolkit;
 import model.Tabuleiro;
 
 
@@ -23,18 +24,12 @@ public class TabuleiroFrame extends JFrame {
 	    
 	    public TabuleiroFrame(Tabuleiro NovoTabuleiro) {
 	    	
-	    	
 	    	Toolkit tk = Toolkit.getDefaultToolkit();
-	    	Dimension screenSize = tk.getScreenSize();
-	    	
-	    	int sl=screenSize.width;
-			int sa=screenSize.height;
-			int x1=sl/2- LARG_DEFAULT/2 ;
-			int y1=sa/2- ALT_DEFAULT/2 ;
+			Dimension ss = tk.getScreenSize();
+			this.setLocation(ss.width/4, (2*ss.height-ss.width)/4);
+			this.setSize(ss.width/2, ss.width/2);
 			
-			
-			
-			Dimension tamTabuleiro = new Dimension(LARG_DEFAULT, ALT_DEFAULT);
+			Dimension tamTabuleiro = new Dimension(ss.width/2, ss.width/2);
 	    	painelTabuleiro = new TabuleiroPainel(NovoTabuleiro);
 	    	painelTabuleiro.setPreferredSize( tamTabuleiro );
 			
@@ -42,10 +37,7 @@ public class TabuleiroFrame extends JFrame {
 			
 	    	setTitle("Xadrez");	
 			getContentPane().add(painelTabuleiro);
-			
-			
-			
-			
+
 		
 		}
 	    

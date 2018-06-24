@@ -1,9 +1,5 @@
 package view;
 
-import javax.swing.JFrame;
-
-import javax.swing.WindowConstants;
-
 import controller.ControladorTabuleiro;
 import model.Tabuleiro;
 
@@ -13,7 +9,6 @@ public class Iniciar{
 
 	private static TelaInicial frameIniciar;
 	private static ControladorTabuleiro controlador;
-	private JFrame telaHome = new JFrame("Xadrex");
     public final int LARG_DEFAULT=800;
     public final int ALT_DEFAULT=800;
 	
@@ -24,7 +19,7 @@ public class Iniciar{
 	}
 	
 
-	public static void Iniciar() {
+	public static void Comecar() {
 		controlador = ControladorTabuleiro.getControladorTabuleiro(null);	
 	 	controlador.addObserver(controlador.frame.painelTabuleiro);
 		
@@ -33,14 +28,14 @@ public class Iniciar{
 	public static void ReIniciar() {
 		
 		controlador.EncerraControladorTabuleiro();
-		controlador = controlador.getControladorTabuleiro(null);	
-		controlador.addObserver(controlador.frame.painelTabuleiro);
+		frameIniciar = new TelaInicial();
+
 		
 	}
 
 
-	public static void Carregar(Tabuleiro boardLoaded) {
-		controlador = controlador.getControladorTabuleiro(boardLoaded);
+	public static void Carregar(Tabuleiro tabuleiroCarregado) {
+		controlador = controlador.getControladorTabuleiro(tabuleiroCarregado);
 		controlador.addObserver(controlador.frame.painelTabuleiro);
 		
 		

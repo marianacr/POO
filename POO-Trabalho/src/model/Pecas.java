@@ -1,10 +1,9 @@
 package model;
 
 import java.awt.Image;
-import java.io.Serializable;
+
 import java.util.Vector;
 
-import javax.swing.ImageIcon;
 
 public abstract class Pecas {
 	public static final int preto = 0;

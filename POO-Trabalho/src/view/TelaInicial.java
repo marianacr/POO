@@ -2,8 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -49,7 +47,7 @@ public class TelaInicial extends JFrame implements ActionListener {
 		        case "Novo Jogo":
 		        	System.out.println( " novo jogo" );
 		        	telaHome.dispose();
-		        	Iniciar.Iniciar();
+		        	Iniciar.Comecar();
 		            break;
 		        case "Carregar Jogo":
 		        	System.out.println( " Carregar" );

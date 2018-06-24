@@ -1,6 +1,6 @@
 package view;
 
-import javax.imageio.ImageIO;
+
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,21 +17,18 @@ import model.TipoPeca;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
+
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
+
+
 
 
 public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionListener{
@@ -43,13 +40,12 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 	
 	public static final int TXT_X=800;
 	public static final int TXT_Y=800;
-	public static int tam = 100;
+	public static int tam;
 	private Rectangle2D quadrados = new Rectangle2D.Double();
 	private Tabuleiro tabuleiro ;
 	private int lin = 8;
 	private int col = 8 ;
 	private Vector<Posicoes> posicoesPossiveis ;
-	private  Object[] pecas = { "Bispo","Rainha", "Cavalo","Torre" };
 	
 	
 	
@@ -64,11 +60,18 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 		
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
+		int larguraCasa = this.getWidth()/8;
+		int alturaCasa = this.getHeight()/8;
+		int larguraPeça = 11*larguraCasa/20;
+		int alturaPeça = 11*alturaCasa/20;
+		 
+	
 		
 		for (int i = 0; i < 8; i++){
+			int posicaoY = alturaCasa*i;
 			for (int j = 0; j < 8; j++){
-				
-				quadrados.setRect(i*tam,j*tam,tam,tam);
+				int posicaoX = larguraCasa*j;
+				quadrados.setRect(posicaoX,posicaoY,larguraCasa,alturaCasa);
 				
 				if ( (i+j) % 2 == 0 ){
 					
@@ -85,12 +88,13 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 		
 		
 		for (int i = 0; i < 8; i++){
+			int posicaoY = alturaCasa*i;
 			for (int j = 0; j < 8; j++){
-				
+				int posicaoX = larguraCasa*j;
 				Pecas p = tabuleiro.LocalizaPeca(i,j);
 				
 				if (p != null) {
-					g2d.drawImage(p.getImage(), i*tam, j*tam, tam, tam, null);
+					g2d.drawImage(p.getImage(), posicaoY,posicaoX,larguraCasa,alturaCasa, null);
 				}
 			}
 		}
@@ -99,10 +103,10 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 			
 			
 			g2d.setPaint(Color.yellow);
-			quadrados.setRect(lin*tam,col*tam,tam,tam);
+			quadrados.setRect(lin*alturaCasa,col*larguraCasa,larguraCasa,alturaCasa);
 			g2d.fill(quadrados);
 			Pecas p = tabuleiro.LocalizaPeca(lin,col);
-			g2d.drawImage(p.getImage(), lin*tam, col*tam, tam, tam, null);
+			g2d.drawImage(p.getImage(), lin*alturaCasa, col*larguraCasa, larguraCasa, alturaCasa, null);
 			lin = col = 8;
 			
 		}
@@ -112,7 +116,7 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 			for (int i = 0; i < posicoesPossiveis.size(); i++) 
 			{
 				
-				quadrados.setRect( posicoesPossiveis.get(i).getX()*tam, posicoesPossiveis.get(i).getY()*tam,tam,tam);
+				quadrados.setRect( posicoesPossiveis.get(i).getX()*alturaCasa, posicoesPossiveis.get(i).getY()*larguraCasa,larguraCasa,alturaCasa);
 				g2d.setStroke(new BasicStroke(5)); //deixa o contorno mais grosso
 				g2d.setPaint(Color.blue);
 				g2d.draw(quadrados);
@@ -152,11 +156,24 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 			 popUpXequeMate(i);
 		 else if (i == 5)
 			 popUpCongelamento();
-		 else
+		 else if ( i == 6)
 			 popUpSalvar();
+		 else
+			 popUpVezErrada();
 		 
 		
 	}
+	 
+	 public void popUpVezErrada() {
+		 
+		
+			Object[] opcoes = { "OK" };
+			UIManager.put("OptionPane.minimumSize",new Dimension(400,200)); 
+		
+			JOptionPane.showOptionDialog(null, "Não é a sua vez", "Xadrez", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes,  opcoes[0]);
+			 repaint();		
+		 
+	 }
 	 
 	 public void popUpSalvar() {
 		 System.out.println( " salvar" );
@@ -206,6 +223,7 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 			if(entrada == JOptionPane.OK_OPTION)
 			{
 				System.out.println("CONGELAMENTO REINICIA JOGO");
+				ControladorTabuleiro.fecharFrame();
 				Iniciar.ReIniciar();
 			}
 		
@@ -227,6 +245,7 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 			if(entrada == JOptionPane.OK_OPTION)
 			{
 				System.out.println("REINICIA JOGO");
+				ControladorTabuleiro.fecharFrame();
 				Iniciar.ReIniciar();
 			}
 		
