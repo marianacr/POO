@@ -18,8 +18,6 @@ public class TabuleiroFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 		
 		public TabuleiroPainel painelTabuleiro;
-	    public final int LARG_DEFAULT=800;
-	    public final int ALT_DEFAULT=800;
 	    
 	    
 	    public TabuleiroFrame(Tabuleiro NovoTabuleiro) {

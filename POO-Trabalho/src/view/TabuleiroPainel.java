@@ -38,8 +38,7 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final int TXT_X=800;
-	public static final int TXT_Y=800;
+
 	public static int tam;
 	private Rectangle2D quadrados = new Rectangle2D.Double();
 	private Tabuleiro tabuleiro ;
@@ -60,18 +59,12 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 		
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		int larguraCasa = this.getWidth()/8;
-		int alturaCasa = this.getHeight()/8;
-		int larguraPeça = 11*larguraCasa/20;
-		int alturaPeça = 11*alturaCasa/20;
-		 
-	
-		
+		int CasaLargura = this.getWidth()/8;
+		int CasaAlt = this.getHeight()/8;
+				
 		for (int i = 0; i < 8; i++){
-			int posicaoY = alturaCasa*i;
 			for (int j = 0; j < 8; j++){
-				int posicaoX = larguraCasa*j;
-				quadrados.setRect(posicaoX,posicaoY,larguraCasa,alturaCasa);
+				quadrados.setRect(CasaLargura*j,CasaAlt*i,CasaLargura,CasaAlt);
 				
 				if ( (i+j) % 2 == 0 ){
 					
@@ -88,13 +81,11 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 		
 		
 		for (int i = 0; i < 8; i++){
-			int posicaoY = alturaCasa*i;
 			for (int j = 0; j < 8; j++){
-				int posicaoX = larguraCasa*j;
 				Pecas p = tabuleiro.LocalizaPeca(i,j);
 				
 				if (p != null) {
-					g2d.drawImage(p.getImage(), posicaoY,posicaoX,larguraCasa,alturaCasa, null);
+					g2d.drawImage(p.getImage(), CasaAlt*i,CasaLargura*j,CasaLargura,CasaAlt, null);
 				}
 			}
 		}
@@ -103,10 +94,10 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 			
 			
 			g2d.setPaint(Color.yellow);
-			quadrados.setRect(lin*alturaCasa,col*larguraCasa,larguraCasa,alturaCasa);
+			quadrados.setRect(lin*CasaAlt,col*CasaLargura,CasaLargura,CasaAlt);
 			g2d.fill(quadrados);
 			Pecas p = tabuleiro.LocalizaPeca(lin,col);
-			g2d.drawImage(p.getImage(), lin*alturaCasa, col*larguraCasa, larguraCasa, alturaCasa, null);
+			g2d.drawImage(p.getImage(), lin*CasaAlt, col*CasaLargura, CasaLargura, CasaAlt, null);
 			lin = col = 8;
 			
 		}
@@ -116,7 +107,7 @@ public class TabuleiroPainel extends JPanel implements ObservaSujeito, ActionLis
 			for (int i = 0; i < posicoesPossiveis.size(); i++) 
 			{
 				
-				quadrados.setRect( posicoesPossiveis.get(i).getX()*alturaCasa, posicoesPossiveis.get(i).getY()*larguraCasa,larguraCasa,alturaCasa);
+				quadrados.setRect( posicoesPossiveis.get(i).getX()*CasaAlt, posicoesPossiveis.get(i).getY()*CasaLargura,CasaLargura,CasaAlt);
 				g2d.setStroke(new BasicStroke(5)); //deixa o contorno mais grosso
 				g2d.setPaint(Color.blue);
 				g2d.draw(quadrados);
